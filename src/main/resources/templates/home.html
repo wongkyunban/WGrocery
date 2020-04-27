@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{home.title}">Insert title here</title>
+</head>
+<body>
+<div>
+    <a data-th-href="@{/locale(lang=zh_CN)}" th:text="#{home.language.chinese}">中文</a>
+    <a data-th-href="@{/locale(lang=en_US)}" th:text="#{home.language.english}">英语</a>
+</div>
+<h1 data-th-text="#{home.welcome(${userName})}">Fluid jumbotron</h1>
+<h1 data-th-text="#{home.introduction(${userBean.name},${userBean.job},${userBean.hobby})}">Hello everyone!</h1>
+<h1 data-th-text="${session.mark}">mark</h1>
+<h1 data-th-text="${application.remark}">haha</h1>
+<p data-th-text="#{home.general.introduction}">good</p>
+<p data-th-utext="#{home.general.introduction}+'name is the best'+ ${userBean.name}">good</p>
+<p data-th-utext="${userBean['name']}">good</p>
+<p data-th-utext="${userBean.getName()}">good</p>
+<p data-th-utext="${#locale.country}">good</p>
+<h1 data-th-text="${#session}">mark</h1>
+<h1 data-th-text="${#messages}">mark</h1>
+<p data-th-text="${#execInfo}">Hello</p>
+<p data-th-text="${hobbies[0]}">KKK</p>
+
+Today is: <span th:text="${#calendars.format(today,'dd MMMM yyyy')}">13 May 2011</span>
+<div th:object="${session.user}">
+    <p>Name: <span th:text="*{firstName}">Sebastian</span>.</p>
+    <p>Surname: <span th:text="*{lastName}">Pepper</span>.</p>
+    <p>Nationality: <span th:text="*{nationality}">Saturn</span>.</p>
+</div>
+
+<div data-th-if="${session.user.isAdmin()} == false">hello</div>
+
+<p data-th-utext="|#{home.general.introduction} name is the best ${userBean.name}|">good</p>
+
+<p data-th-text="${{today}}">Today</p>
+<p data-th-text="${today}">Today</p>
+<p> Now is [[${today}]]</p>
+<p> Now is [(${today})]</p>
+<p data-th-inline="none"> Now is [[1,2,3,4]]</p>
+
+</body>
+</html>

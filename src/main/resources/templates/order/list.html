@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <link rel="stylesheet" type="text/css" media="all" data-th-href="@{/css/wgrocery.css}" />
+    <title>Title</title>
+</head>
+<body>
+<table data-th-if="${show}">
+    <thead>
+    <tr>
+        <th>DATE</th>
+        <th>CUSTOMER</th>
+        <th>TOTAL</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody data-th-remove="all-but-first">
+    <tr data-th-each="order : ${orders}" data-th-class="${orderStat.odd}? 'odd'">
+        <td data-th-text="${#calendar.format(order.date,'dd/MMM/yyyy')}"></td>
+        <td data-th-text="${order.customer.name}"></td>
+        <td data-th-text="${#aggregates.sum(o.orderLines)} ? ${true} : ${false}"></td>
+        <td>
+            <span data-th-text="${#lists.size(product.comments)}">0</span> comment/s
+            <a href="comments.html" data-th-href="@{/product/comments(prodId=${product.id})}"
+               data-th-unless="${#lists.isEmpty(product.comments)}">view</a>
+        </td>
+    </tr>
+    </tbody>
+
+</table>
+<p>
+    <a href="../home.html" data-th-href="@{/home}">Return to home</a>
+</p>
+</body>
+</html>

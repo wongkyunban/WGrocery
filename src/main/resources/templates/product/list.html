@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <link rel="stylesheet" type="text/css" media="all" data-th-href="@{/css/wgrocery.css}" />
+    <title>Title</title>
+</head>
+<body>
+<h1>Product List</h1>
+<table data-th-if="${show}">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>In Stock</th>
+        <th>Comments</th>
+    </tr>
+    </thead>
+    <tbody data-th-remove="all-but-first">
+    <tr data-th-each="product,dd : ${products}" data-th-class="${dd.odd}? 'odd'">
+        <td data-th-text="${product.name}"></td>
+        <td data-th-text="${product.price}"></td>
+        <td data-th-text="${product.inStock} ? ${true} : ${false}"></td>
+        <td>
+            <span data-th-text="${#lists.size(product.comments)}">0</span> comment/s
+            <a href="comments.html" data-th-href="@{/product/comments(prodId=${product.id})}"
+               data-th-unless="${#lists.isEmpty(product.comments)}">view</a>
+        </td>
+    </tr>
+</tbody>
+
+</table>
+<p>
+    <a href="../home.html" th:href="@{/home}">Return to home</a>
+</p>
+
+<div data-th-replace="~{::Heloo}">Hello world</div>
+<div data-th-fragment="Heloo">
+    <p>Bye Bye</p>
+</div>
+<a href="/something" th:remove="${condition}? tag">Link text not to be removed</a>
+<p data-th-text="${#request.getAttribute('show')}">HHHHH</p>
+
+</body>
+</html>

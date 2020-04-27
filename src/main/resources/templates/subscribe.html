@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<form action="subscribe.html" data-th-attr="action=@{/subscribe}">
+    <fieldset>
+        <input type="text" name="email"/>
+        <input type="submit" value="Subscribe!" data-th-attr="value=#{subscribe.submit}">
+    </fieldset>
+</form>
+
+<p data-th-text="#{subscribe.submit}">Hello</p>
+<table>
+    <tr data-th-each="user : ${users}">
+        <td data-th-text="${user.firstName}"></td>
+        <td data-th-text="${user.lastName}"></td>
+        <td data-th-text="${user.nationality}"></td>
+    </tr>
+</table>
+
+</body>
+</html>
